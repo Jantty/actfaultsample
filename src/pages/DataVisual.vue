@@ -10,6 +10,6 @@ export default {
 };
 </script>
 <style>
-.datavisual-page {
-}
+/* .datavisual-page {
+} */
 </style>
