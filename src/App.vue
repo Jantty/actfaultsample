@@ -1,7 +1,23 @@
 <template>
     <div id="app">
         <el-container class="app-out-pannel">
-            <el-header class="sys-header">活断层项目系统</el-header>
+            <el-header class="sys-header"> 活断层项目系统 </el-header>
+            <!-- <el-menu
+                :default-active="activeIndex2"
+                class="el-menu-demo"
+                mode="horizontal"
+                @select="handleSelect"
+                background-color="#545c64"
+                text-color="#fff"
+                active-text-color="#ffd04b"
+            >
+                <el-submenu index="1">
+                    <template slot="title">我的工作台</template>
+                    <el-menu-item index="1-1">选项1</el-menu-item>
+                    <el-menu-item index="1-2">选项2</el-menu-item>
+                    <el-menu-item index="1-3">选项3</el-menu-item>
+                </el-submenu>
+            </el-menu> -->
             <el-container class="app-content-pannel">
                 <el-aside width="200px" class="sys-menu">
                     <el-menu
@@ -40,7 +56,7 @@ export default {
             if (index === '1') {
                 this.$router.push('/onemap');
             } else if (index === '2') {
-                this.$router.push('/');
+                this.$router.push('/data');
             }
         },
     },
