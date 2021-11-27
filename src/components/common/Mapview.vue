@@ -12,6 +12,7 @@ export default {
     name: 'Mapview',
     components: {},
     mounted: function () {
+        console.log(this.$store.state._defaultView);
         this._createMapView();
     },
     methods: {
@@ -30,6 +31,7 @@ export default {
             });
 
             view.ui.components = [];
+            this.$store.ommit('_setDefaultView', view);
             console.log(view);
         },
     },

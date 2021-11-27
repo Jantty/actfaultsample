@@ -8,18 +8,21 @@
                         default-active="1"
                         class="el-menu-vertical-demo"
                         @select="handleMenuSelect"
-                        @open="handleOpen"
-                        @close="handleClose"
                         :collapse="true"
                     >
                         <el-menu-item index="1" class="sys-menu-item">
                             <i class="el-icon-map-location"></i>
                             <span slot="title">活断层专题图</span>
                         </el-menu-item>
+                        <el-menu-item index="2" class="sys-menu-item">
+                            <i class="el-icon-s-data"></i>
+                            <span slot="title">数据统计</span>
+                        </el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-main class="sys-content">
-                    <Mapview />
+                    <router-view></router-view>
+                    <!-- <Mapview /> -->
                 </el-main>
             </el-container>
         </el-container>
@@ -27,16 +30,19 @@
 </template>
 
 <script>
-import Mapview from './components/common/Mapview';
+// import Mapview from './components/common/Mapview';
 export default {
     name: 'App',
-    components: {
-        Mapview,
-    },
-    data() {
-        return {
-            // isCollapse: true,
-        };
+    components: {},
+    methods: {
+        handleMenuSelect(index) {
+            console.log(index);
+            if (index === '1') {
+                this.$router.push('/onemap');
+            } else if (index === '2') {
+                this.$router.push('/');
+            }
+        },
     },
 };
 </script>
