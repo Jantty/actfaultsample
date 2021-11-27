@@ -87,7 +87,7 @@ export default {
             mapView.ui.add(zoom);
 
             mapView.ui.components = [];
-            // this.$store.ommit('_setDefaultView', mapView);
+            this.$store.commit('_setDefaultMapView', mapView);
             console.log(mapView);
         },
     },
