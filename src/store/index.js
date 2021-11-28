@@ -17,7 +17,6 @@ const getters = {
         return state._defaultMapView;
     },
     _getDefaultMapTreeVisible() {
-
         return state._defaultMapTreeVisible;
     }
 };

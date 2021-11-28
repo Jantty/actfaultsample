@@ -26,23 +26,19 @@ export default {
                     layerurl: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer',
                 },
                 {
-                    label: '一级 3',
+                    label: '行政区划',
                     children: [
                         {
-                            label: '二级 3-1',
-                            children: [
-                                {
-                                    label: '三级 3-1-1',
-                                },
-                            ],
+                            label: '省界',
+                            layerid: 'layerid',
+                            layerurl:
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Sichuan_prov_proj/FeatureServer',
                         },
                         {
-                            label: '二级 3-2',
-                            children: [
-                                {
-                                    label: '三级 3-2-1',
-                                },
-                            ],
+                            label: '县界',
+                            layerid: 'layerid',
+                            layerurl:
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Sichuan_county_proj/FeatureServer',
                         },
                     ],
                 },
@@ -61,8 +57,23 @@ export default {
                 const resultLayer = view.map.findLayerById('layerid');
                 if (resultLayer) view.map.remove(resultLayer);
 
-                const [TileLayer] = await loadModules(['esri/layers/TileLayer'], options);
-                const layer = new TileLayer({ url: data.layerurl, id: data.layerid });
+                const [TileLayer, FeatureLayer] = await loadModules(
+                    ['esri/layers/TileLayer', 'esri/layers/FeatureLayer'],
+                    options,
+                );
+                const c = data.layerurl.split('/');
+                const serverType = c[c.length - 1];
+                let layer = '';
+                switch (serverType) {
+                    case 'MapServer':
+                        layer = new TileLayer({ url: data.layerurl, id: data.layerid });
+                        break;
+                    case 'FeatureServer':
+                        layer = new FeatureLayer({ url: data.layerurl, id: data.layerid });
+                        break;
+                }
+
+                // const layer = new TileLayer({ url: data.layerurl, id: data.layerid });
                 view.map.add(layer);
             }
         },
