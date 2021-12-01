@@ -1,10 +1,12 @@
 <template>
     <div class="maptools-view">
-        <div class="basemap-toggle"></div>
-        <span class="maptools-item" @click="handleMapTools" id="maptree">专题图层</span>
-        <span class="maptools-item" @click="handleMapTools" id="distance">距离测量</span>
-        <span class="maptools-item" @click="handleMapTools" id="area">面积测量</span>
-        <span class="maptools-item" @click="handleMapTools" id="clear">清屏</span>
+        <div class="basemap-toggle">
+            <span class="maptools-item" @click="handleMapTools" id="xzqhquery">行政区划导航</span>
+            <span class="maptools-item" @click="handleMapTools" id="maptree">专题图层</span>
+            <span class="maptools-item" @click="handleMapTools" id="swipe">卷帘分析</span>
+            <span class="maptools-item" @click="handleMapTools" id="multiscreens">多屏对比</span>
+            <span class="maptools-item" @click="handleMapTools" id="clear">清屏</span>
+        </div>
     </div>
 </template>
 
@@ -15,13 +17,17 @@ export default {
         handleMapTools(e) {
             console.log(e.target.id);
             switch (e.target.id) {
+                case 'xzqhquery':
+                    this.xzqhquery();
+                    break;
                 case 'maptree':
                     this.open();
                     break;
                 case 'distance':
                     console.log('openXZQHPannel()');
                     break;
-                case 'area':
+                case 'multiscreens':
+                    this.multiscreens();
                     break;
                 case 'clear':
                     break;
@@ -32,6 +38,14 @@ export default {
         open() {
             let currentVisible = this.$store.getters._getDefaultMapTreeVisible;
             this.$store.commit('_setDefaultMapTreeVisible', !currentVisible);
+        },
+        xzqhquery() {
+            let currentVisible = this.$store.getters._getDefaultXZQHVisible;
+            this.$store.commit('_setDefaultXZQHVisible', !currentVisible);
+        },
+        multiscreens() {
+            let currentVisible = this.$store.getters._getDefaultMultiScreensVisible;
+            this.$store.commit('_setDefaultMultiScreensVisible', !currentVisible);
         },
     },
 };

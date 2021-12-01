@@ -44,7 +44,7 @@ export default {
             let basemap = new Basemap({
                 baseLayers: [
                     new TileLayer({
-                        url: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+                        url: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetWarm/MapServer',
                         title: 'Basemap',
                     }),
                 ],
@@ -88,6 +88,7 @@ export default {
 
             mapView.ui.components = [];
             this.$store.commit('_setDefaultMapView', mapView);
+
             // console.log(mapView);
         },
     },

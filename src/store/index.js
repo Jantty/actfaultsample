@@ -7,6 +7,12 @@ const state = {
     _defaultMapView: '',//默认地图view
     _defaultThemeColor: '#409EFF',
     _defaultMapTreeVisible: false,//图层目录显示/隐藏
+    _defaultMultiScreensVisible: false,
+    _defaultXZQHVisible: false,
+
+    _defaultMultiScreenLeftView: '',
+    _defaultMultiScreenRightView: ''
+
 
 };
 const getters = {
@@ -18,7 +24,25 @@ const getters = {
     },
     _getDefaultMapTreeVisible() {
         return state._defaultMapTreeVisible;
-    }
+    },
+    _getDefaultXZQHVisible() {
+        return state._defaultXZQHVisible;
+    },
+
+    _getDefaultMultiScreensVisible() {
+        return state._defaultMultiScreensVisible;
+    },
+    _getDefaultMultiScreenLeftView() {
+        return state._defaultMultiScreenLeftView;
+    },
+    _getDefaultMultiScreenRightView() {
+        return state._defaultMultiScreenRightView;
+    },
+
+
+
+
+
 };
 const mutations = {
     _setDefaultThemeColor(state, value) {
@@ -29,6 +53,19 @@ const mutations = {
     },
     _setDefaultMapTreeVisible(state, value) {
         state._defaultMapTreeVisible = value;
+    },
+    _setDefaultXZQHVisible(state, value) {
+        state._defaultXZQHVisible = value;
+    },
+
+    _setDefaultMultiScreensVisible(state, value) {
+        state._defaultMultiScreensVisible = value;
+    },
+    _setDefaultMultiScreenLeftView(state, value) {
+        state._defaultMultiScreenLeftView = value;
+    },
+    _setDefaultMultiScreenRightView(state, value) {
+        state._defaultMultiScreenRightView = value;
     }
 };
 

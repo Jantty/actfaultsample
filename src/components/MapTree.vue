@@ -16,9 +16,9 @@ export default {
         return {
             data: [
                 {
-                    label: '暖色系图层',
+                    label: '暗夜系图层',
                     layerid: 'layerid',
-                    layerurl: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetWarm/MapServer',
+                    layerurl: 'http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
                 },
                 {
                     label: '灰色系图层',
@@ -32,15 +32,27 @@ export default {
                             label: '省界',
                             layerid: 'layerid',
                             layerurl:
-                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Sichuan_prov_proj/FeatureServer',
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_prov_proj/FeatureServer',
+                        },
+                        {
+                            label: '市界',
+                            layerid: 'layerid',
+                            layerurl:
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_city_proj/FeatureServer',
                         },
                         {
                             label: '县界',
                             layerid: 'layerid',
                             layerurl:
-                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/Sichuan_county_proj/FeatureServer',
+                                'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_county_proj/FeatureServer',
                         },
                     ],
+                },
+                {
+                    label: '火车站',
+                    layerid: 'layerid',
+                    layerurl:
+                        'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_stat_proj/FeatureServer',
                 },
             ],
             defaultProps: {
@@ -83,7 +95,7 @@ export default {
 <style>
 .maptree-pannel {
     position: absolute;
-    top: 20px;
+    bottom: 20px;
     left: 15px;
     width: 200px;
     height: 300px;
