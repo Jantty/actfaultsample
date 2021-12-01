@@ -69,7 +69,7 @@ export default {
                 config.options,
             );
             const queryTask = new QueryTask({
-                url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_prov_proj/FeatureServer',
+                url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_prov_proj/FeatureServer/0',
             });
             let query = new Query();
             query.returnGeometry = false;
@@ -78,6 +78,7 @@ export default {
 
             //Promise then 链式调用
             queryTask.execute(query).then(function (results) {
+                console.log(results.features);
                 let currentData = [];
                 if (results.features.length > 0) {
                     results.features.map((item) => {
@@ -89,7 +90,7 @@ export default {
                     _self.provinceOptions = currentData;
                 } else {
                     _self.$message({
-                        message: '暂时没有相关省份数据',
+                        message: '暂时没有省份数据',
                         type: 'warning',
                     });
                 }
@@ -108,12 +109,12 @@ export default {
                 config.options,
             );
             const queryTask = new QueryTask({
-                url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/XZQHCity_WebMokatuo/FeatureServer/0',
+                url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_city_proj/FeatureServer/0',
             });
             let query = new Query();
             query.returnGeometry = false;
             query.outFields = ['*'];
-            query.where = "Code like '" + provinceCode + "%'";
+            query.where = "adcode like '" + provinceCode + "%'";
 
             //async await用法：解决Javascript的同步和异步问题
             let results = await queryTask.execute(query);
@@ -122,7 +123,7 @@ export default {
                 results.features.map((item) => {
                     currentCityData.push({
                         value: item.attributes.adcode,
-                        label: item.attributes.Name,
+                        label: item.attributes.name,
                     });
                 });
                 //循环遍历 获取每一市级对应的区县数据
@@ -130,7 +131,7 @@ export default {
                     currentCityData.map(async (item2) => {
                         const cityCode = item2.value.toString().substring(0, 4);
                         const queryTask2 = new QueryTask({
-                            url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/XZQHCounty_WebMokatuo/FeatureServer/0',
+                            url: 'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_county_proj/FeatureServer/0',
                         });
                         let query2 = new Query();
                         query2.returnGeometry = false;
@@ -154,16 +155,16 @@ export default {
         //定位跳转并高亮
         async handleItemClick(val, type) {
             let serverUrl = '';
-            let code = '';
+            let adcode = '';
             const view = this.$store.getters._getDefaultMapView;
             if (type === 'city') {
-                code = val.toString().substring(0, 4);
+                adcode = val.toString().substring(0, 4);
                 serverUrl =
-                    'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_city_proj/FeatureServer';
+                    'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_city_proj/FeatureServer/0';
             } else if (type === 'county') {
-                code = val.toString().substring(0, 6);
+                adcode = val.toString().substring(0, 6);
                 serverUrl =
-                    'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_county_proj/FeatureServer';
+                    'https://services3.arcgis.com/U26uBjSD32d7xvm2/arcgis/rest/services/CN_county_proj/FeatureServer/0';
             }
             const [QueryTask, Query, Graphic] = await loadModules(
                 ['esri/tasks/QueryTask', 'esri/tasks/support/Query', 'esri/Graphic'],
@@ -175,7 +176,7 @@ export default {
             let query = new Query();
             query.returnGeometry = true;
             query.outFields = ['*'];
-            query.where = "adcode like '" + code + "%'"; //查询SQL
+            query.where = "adcode like '" + adcode + "%'"; //查询SQL
 
             let results = await queryTask.execute(query);
 
