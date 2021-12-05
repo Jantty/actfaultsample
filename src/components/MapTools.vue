@@ -29,14 +29,14 @@ import config from './config';
 
 export default {
     name: 'MapTools',
-    mounted: function () {
-        const checkView = setInterval(() => {
-            if (this.$store.getters._getDefaultMapView) {
-                this._initSketchTool();
-                clearInterval(checkView);
-            }
-        }, 200);
-    },
+    // mounted: function () {
+    //     const checkView = setInterval(() => {
+    //         if (this.$store.getters._getDefaultMapView) {
+    //             this._initSketchTool();
+    //             clearInterval(checkView);
+    //         }
+    //     }, 200);
+    // },
     methods: {
         handleMapTools(e) {
             console.log(e.target.id);

@@ -5,6 +5,8 @@ var pgConfig = "postgres://postgres:123456@localhost:5432/activefault";
 
 //获取用户信息接口
 router.get('/get', function (req, res) {
+    // console.log(req.query.name);
+    var name = req.query.name;
     var client = new pg.Client(pgConfig);
     client.connect(function (isErr) {
         if (isErr) {
@@ -12,7 +14,7 @@ router.get('/get', function (req, res) {
             client.end();
             return;
         }
-        client.query('select * from "user" where name = $1', ['jantty'], function (isErr, rst) {
+        client.query('select * from "user" where name = $1', [name], function (isErr, rst) {
             if (isErr) {
                 console.log('query error:' + isErr.message);
                 res.send({

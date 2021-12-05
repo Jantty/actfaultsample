@@ -5,7 +5,6 @@ import OneMap from './../pages/OneMap';
 import MultiScreen from './../components/MultiScreen'
 
 Vue.use(Router);
-// import DataSource from '../components/system/content/dataSource/DataSource.vue';
 
 export default new Router({
     routes: [
