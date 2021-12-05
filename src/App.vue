@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <el-container class="app-out-pannel">
-            <el-header class="sys-header"> 活断层项目系统 </el-header>
+            <el-header class="sys-header"> WebGIS Demo</el-header>
             <!-- <el-menu
                 :default-active="activeIndex2"
                 class="el-menu-demo"

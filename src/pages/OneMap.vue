@@ -3,8 +3,8 @@
         <Mapview />
         <MapTools />
         <MapTree />
-        <MultiScreens />
         <XZQHQuery />
+        <ResultTable />
     </div>
 </template>
 
@@ -12,8 +12,8 @@
 import Mapview from './../components/common/Mapview';
 import MapTools from './../components/MapTools';
 import MapTree from './../components/MapTree';
-import MultiScreens from './../components/MultiScreens';
 import XZQHQuery from './../components/XZQHQuery';
+import ResultTable from './../components/ResultTable';
 
 export default {
     name: 'OneMap',
@@ -21,8 +21,8 @@ export default {
         Mapview,
         MapTools,
         MapTree,
-        MultiScreens,
         XZQHQuery,
+        ResultTable,
     },
     methods: {},
 };

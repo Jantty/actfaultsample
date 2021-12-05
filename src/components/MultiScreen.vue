@@ -7,14 +7,10 @@
 
 <script>
 import { loadModules } from 'esri-loader';
-// import config from './config';
-const options = {
-    url: 'https://js.arcgis.com/4.18/init.js',
-    css: 'https://js.arcgis.com/4.18/esri/themes/light/main.css',
-};
+import config from './config';
 
 export default {
-    name: 'MultiScreens',
+    name: 'MultiScreen',
     mounted: function () {
         this._initMap();
     },
@@ -22,7 +18,7 @@ export default {
         async _initMap() {
             const [Map, MapView, Basemap, TileLayer, watchUtils] = await loadModules(
                 ['esri/Map', 'esri/views/MapView', 'esri/Basemap', 'esri/layers/TileLayer', 'esri/core/watchUtils'],
-                options,
+                config.options,
             );
 
             const basemap = new Basemap({

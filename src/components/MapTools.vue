@@ -5,12 +5,8 @@
         <el-dropdown trigger="click" class="maptools-item" @command="handleCommand">
             <span class="el-dropdown-link">地图测量<i class="el-icon-arrow-down el-icon--right"></i> </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-plus" command="distance">距离测量</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-circle-plus" command="area">面积测量</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-edit" command="diymeasurement_distance"
-                    >自定义测量(长度)</el-dropdown-item
-                >
-                <el-dropdown-item icon="el-icon-edit" command="diymeasurement_area">自定义测量(面积)</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-plus" command="diymeasurement_distance">距离测量</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-circle-plus" command="diymeasurement_area">面积测量</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown trigger="click" class="maptools-item" @command="handleCommand">
@@ -28,6 +24,9 @@
 </template>
 
 <script>
+import { loadModules } from 'esri-loader';
+import config from './config';
+
 export default {
     name: 'MapTools',
     mounted: function () {
@@ -62,12 +61,6 @@ export default {
         },
         handleCommand(command) {
             switch (command) {
-                case 'distance':
-                    this.initDistanceMap();
-                    break;
-                case 'area':
-                    this.initAreaMap();
-                    break;
                 case 'diymeasurement_distance':
                     this.initDIYMeasurement('distance');
                     break;
@@ -81,13 +74,13 @@ export default {
                     this.$router.push('/onemap/one');
                     break;
                 case 'swipanalyst':
-                    this._initSwipe();
+                    // this._initSwipe();
                     break;
                 case 'printmap':
-                    this.handlePrintMap();
+                    // this.handlePrintMap();
                     break;
                 case 'openPopup':
-                    this.openMapPopup();
+                    // this.openMapPopup();
                     break;
                 default:
                     break;
