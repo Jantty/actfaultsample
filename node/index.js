@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
-var user = require('./routers/user');
+var bodyParser = require('body-parser');
 var home = require('./routers/home');
+var user = require('./routers/user');
 
 //设置跨域访问
 app.all('*', function (req, res, next) {
@@ -13,7 +14,12 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.use('/user', user);
+app.use(bodyParser.urlencoded({  //配置这两行代码
+    extended: true
+}));
+app.use(bodyParser.json());      //配置这两行代码
+
 app.use('/', home);
+app.use('/user', user);
 
 app.listen(3001);

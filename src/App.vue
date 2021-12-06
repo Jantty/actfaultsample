@@ -35,12 +35,28 @@
         </el-container>
         <el-dialog title="用户登录/注册" :visible.sync="loginDialogVisible" width="30%">
             <div class="login-content">
-                <el-input placeholder="请输入用户名" v-model="userNameInput" clearable> </el-input>
-                <el-input placeholder="请输入密码" v-model="passwordInput" show-password></el-input>
+                <div class="login-content-login" v-show="!loginSwitch">
+                    <p>用户名：</p>
+                    <el-input placeholder="请输入用户名" v-model="userNameInput" clearable> </el-input>
+                    <p>密码：</p>
+                    <el-input placeholder="请输入密码" v-model="userPsdInput" show-password></el-input>
+                </div>
+                <div class="login-content-insert" v-show="loginSwitch">
+                    <p>用户名：</p>
+                    <el-input placeholder="请输入用户名" v-model="userNameInput_insert" clearable> </el-input>
+                    <p>密码：</p>
+                    <el-input placeholder="请输入密码" v-model="userPsdInput_insert" clearable> </el-input>
+                    <p>手机号：</p>
+                    <el-input placeholder="请输入手机号" v-model="userPhoneInput_insert" clearable> </el-input>
+                    <p>邮箱：</p>
+                    <el-input placeholder="请输入邮箱" v-model="userEmailInput_insert" clearable> </el-input>
+                </div>
             </div>
+            <br />
+            <el-switch v-model="loginSwitch" active-text="注册" inactive-text="登录"> </el-switch>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="loginDialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="userLogin">确 定</el-button>
+                <el-button type="primary" @click="userLogin">{{ loginSwitch ? '注册' : '登录' }}</el-button>
             </span>
         </el-dialog>
     </div>
@@ -48,6 +64,8 @@
 
 <script>
 import axios from 'axios';
+import qs from 'qs';
+
 export default {
     name: 'App',
     components: {},
@@ -56,7 +74,12 @@ export default {
             username: '未登录',
             loginDialogVisible: false,
             userNameInput: '',
-            passwordInput: '',
+            userPsdInput: '',
+            loginSwitch: false,
+            userNameInput_insert: '',
+            userPsdInput_insert: '',
+            userPhoneInput_insert: '',
+            userEmailInput_insert: '',
         };
     },
     methods: {
@@ -74,36 +97,74 @@ export default {
         },
         userLogin() {
             const _self = this;
-            const name = this.userNameInput;
-            // const psd = this.passwordInput;
-            // console.log(name, psd);
-
-            axios
-                .get('http://localhost:3001/user/get', {
-                    params: {
-                        name,
-                    },
-                })
-                .then(function (response) {
-                    console.log(response);
-                    if (response.data.status === 'success') {
-                        const psd = response.data.data[0].password;
-                        if (_self.passwordInput === psd) {
+            if (!_self.loginSwitch) {
+                //用户登录
+                const name = _self.userNameInput;
+                const psd = _self.userPsdInput;
+                axios
+                    .get('http://localhost:3001/user/get', {
+                        params: {
+                            name,
+                        },
+                    })
+                    .then(function (response) {
+                        if (response.data.status === 'success') {
+                            // console.log(response.data.data[0]);
+                            const password = response.data.data[0].password;
+                            if (password === psd) {
+                                _self.$message({
+                                    message: '恭喜你，登陆成功',
+                                    type: 'success',
+                                });
+                                _self.username = response.data.data[0].name;
+                                _self.loginDialogVisible = false;
+                            } else {
+                                _self.$message.error('登录失败，用户名或密码错误');
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        _self.loginDialogVisible = false;
+                        console.log(error);
+                    });
+            } else {
+                //用户注册
+                const name = _self.userNameInput_insert;
+                const psd = _self.userPsdInput_insert;
+                const phone = _self.userPhoneInput_insert;
+                const email = _self.userEmailInput_insert;
+                if (!name || !psd) {
+                    _self.$message({
+                        message: '请填写用户名或密码',
+                        type: 'warning',
+                    });
+                    return;
+                }
+                axios
+                    .post(
+                        'http://localhost:3001/user/insert',
+                        qs.stringify({
+                            name,
+                            psd,
+                            phone,
+                            email,
+                        }),
+                    )
+                    .then(function (response) {
+                        if (response.data.status === 'success') {
                             _self.$message({
-                                message: '恭喜你，登录成功！',
+                                message: '用户注册成功，请登录',
                                 type: 'success',
                             });
-                            _self.username = response.data.data[0].name;
-                            // _self.loginDialogVisible = false;
                         } else {
-                            _self.$message.error('登录失败，用户名或密码错误');
+                            _self.$message.error('用户注册失败');
                         }
-                    }
-                })
-                .catch(function (error) {
-                    _self.loginDialogVisible = false;
-                    console.log(error);
-                });
+                    })
+                    .catch(function (error) {
+                        _self.loginDialogVisible = false;
+                        console.log(error);
+                    });
+            }
         },
     },
 };
@@ -130,6 +191,22 @@ body,
     font-weight: 600;
     display: flex;
     justify-content: space-between;
+}
+.sys-menu {
+    background-color: #545c64;
+    width: 64px !important;
+    overflow: hidden !important;
+}
+.sys-content {
+    padding: 5px !important;
+}
+
+.morescreen-view {
+    width: 100%;
+    height: 820px;
+}
+.user-info {
+    font-size: 15px;
 }
 .user-info {
     font-size: 15px;
