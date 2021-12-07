@@ -5,6 +5,8 @@ Vue.use(Vuex);
 
 const state = {
     _defaultMapView: '',//默认地图view
+    _defaultSceneView: '',//默认三维场景view
+
     _defaultMapTreeVisible: false,//图层目录显示/隐藏
     _defaultXZQHVisible: false,
 
@@ -17,6 +19,10 @@ const getters = {
     _getDefaultMapView() {
         return state._defaultMapView;
     },
+    _getDefaultSceneView() {
+        return state._defaultSceneView;
+    },
+
     _getDefaultMapTreeVisible() {
         return state._defaultMapTreeVisible;
     },
@@ -36,6 +42,10 @@ const mutations = {
     _setDefaultMapView(state, value) {
         state._defaultMapView = value;
     },
+    _setDefaultSceneView(state, value) {
+        state._defaultSceneView = value;
+    },
+
     _setDefaultMapTreeVisible(state, value) {
         state._defaultMapTreeVisible = value;
     },

@@ -18,10 +18,14 @@
                         :collapse="true"
                     >
                         <el-menu-item index="1" class="sys-menu-item">
-                            <i class="el-icon-map-location"></i>
-                            <span slot="title">活断层专题图</span>
+                            <i class="el-icon-picture-outline-round"></i>
+                            <span slot="title">三维场景</span>
                         </el-menu-item>
                         <el-menu-item index="2" class="sys-menu-item">
+                            <i class="el-icon-picture-outline"></i>
+                            <span slot="title">活断层专题图</span>
+                        </el-menu-item>
+                        <el-menu-item index="3" class="sys-menu-item">
                             <i class="el-icon-s-data"></i>
                             <span slot="title">数据统计</span>
                         </el-menu-item>
@@ -85,11 +89,24 @@ export default {
     methods: {
         handleMenuSelect(index) {
             console.log(index);
-            if (index === '1') {
-                this.$router.push('/onemap');
-            } else if (index === '2') {
-                this.$router.push('/data');
+            switch (index) {
+                case '1':
+                    this.$router.push('/scenemap');
+                    break;
+                case '2':
+                    this.$router.push('/map');
+                    break;
+                case '3':
+                    this.$router.push('/data');
+                    break;
+                default:
+                    break;
             }
+            // if (index === '2') {
+            //     this.$router.push('/map');
+            // } else if (index === '3') {
+            //     this.$router.push('/data');
+            // }
         },
         handleUserLogin() {
             // console.log('2');

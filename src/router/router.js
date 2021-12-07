@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import DataVisual from './../pages/DataVisual';
 import OneMap from './../pages/OneMap';
-import MultiScreen from './../components/MultiScreen'
+import SceneMap from './../pages/SceneMap';
+import MultiScreen from './../components/MultiScreen';
 
 Vue.use(Router);
 
@@ -13,8 +14,12 @@ export default new Router({
             component: DataVisual,
         },
         {
-            path: '/onemap',
+            path: '/map',
             component: OneMap,
+        },
+        {
+            path: '/scenemap',
+            component: SceneMap,
         },
         {
             path: '/onemap/morescreens',

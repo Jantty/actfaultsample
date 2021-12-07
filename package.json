@@ -18,6 +18,7 @@
     "@vue/cli-service": "~4.5.0",
     "axios": "^0.24.0",
     "babel-eslint": "^10.1.0",
+    "echarts": "^5.2.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "esri-loader": "^3.3.0",

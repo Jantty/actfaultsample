@@ -45,7 +45,7 @@ router.post('/insert', function (req, res) {
             client.end();
             return;
         };
-        client.query('INSERT INTO "user" (name, psd, phone, email) VALUES ($1, $2, $3, $4);', [name, psd, phone, email], function (isErr, rst) {
+        client.query('INSERT INTO "user" (name, password, phone, email) VALUES ($1, $2, $3, $4);', [name, psd, phone, email], function (isErr, rst) {
             if (isErr) {
                 console.log('query error:' + isErr.message);
                 res.send({

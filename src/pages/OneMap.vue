@@ -1,6 +1,7 @@
 <template>
     <div class="onemap-page">
         <Mapview />
+        <Sceneview />
         <MapTools />
         <MapTree />
         <XZQHQuery />

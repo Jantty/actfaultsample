@@ -9,10 +9,11 @@
 
 <script>
 import { loadModules } from 'esri-loader';
-const options = {
-    url: 'https://js.arcgis.com/4.18/init.js',
-    css: 'https://js.arcgis.com/4.18/esri/themes/light/main.css',
-};
+import config from './../config';
+// const options = {
+//     url: 'https://js.arcgis.com/4.18/init.js',
+//     css: 'https://js.arcgis.com/4.18/esri/themes/light/main.css',
+// };
 export default {
     name: 'Mapview',
     components: {},
@@ -38,7 +39,7 @@ export default {
                     // 'esri/widgets/ScaleBar',
                     // 'esri/widgets/Zoom',
                 ],
-                options,
+                config.options,
             );
 
             let basemap = new Basemap({

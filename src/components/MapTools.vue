@@ -19,7 +19,7 @@
                 <el-dropdown-item icon="el-icon-view" command="openPopup">开启图层弹窗</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
-        <span class="maptools-item" @click="handleMapToolsitemClick" id="clear">清屏</span>
+        <span class="maptools-item" @click="handleMapTools" id="clear">清屏</span>
     </div>
 </template>
 
